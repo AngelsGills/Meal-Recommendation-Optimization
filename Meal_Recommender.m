@@ -59,29 +59,29 @@ if txt == 'Y'
 else 
     e = 0;
 end
-mealLimits = [a, b, c, d, e]; 			                            	% number of each mealType allowed (i.e., max) 
+mealLimits = [a, b, c, d, e]; 			                            		% number of each mealType allowed (i.e., max) 
 mealMap = containers.Map(mealTypes,mealLimits);		                		% mealMap equals a map of mealTypes and mealLimits
 
 % define chromosome and fitness function:
-chromosome_length = height(meal_table);			                    	% chromo_len based on rows of table
-fit_func = @(chromosome)-(chromosome * ones(chromosome_length,1));		% fit_func considering credits of meal_table
+chromosome_length = height(meal_table);			                    		% chromo_len based on rows of table
+fit_func = @(chromosome)-(chromosome * ones(chromosome_length,1));			% fit_func considering credits of meal_table
 % defined masks based on class_table:
 category_index_map = containers.Map();				                	% creates a category_index_map map
 	for i = 1:height(meal_table)				                    	% i to height of meal_table
-	MealType = meal_table.Meal{i};			                        % MealType = MealType{i}
+	MealType = meal_table.Meal{i};			                        	% MealType = MealType{i}
 		if isKey(category_index_map,MealType)		                	% iskey(map, MealTye{i}
-		indices = category_index_map(MealType);	                    	% indices = map(MealType)
-		indices = horzcat(indices, i);			                  % indices = MealType concatenated horizontally with i
-		category_index_map(MealType) = indices;	                    	% .._map = indices defined above ^
+		indices = category_index_map(MealType);	                    		% indices = map(MealType)
+		indices = horzcat(indices, i);			                  	% indices = MealType concatenated horizontally with i
+		category_index_map(MealType) = indices;	                    		% .._map = indices defined above ^
 		else
 		category_index_map(MealType) = [i];		                    	%.._map(MealType) = i
 		end
 	end
-noof_categories = size(category_index_map,1);			            	% get columns
+noof_categories = size(category_index_map,1);			            		% get columns
 masks = zeros(noof_categories,height(meal_table));		           	 	% masks of zeros for col and row of table
 keySet = keys(category_index_map);				                    	% create cell array cotaining its keys for map
 for i = 1:noof_categories					                        % i to noof_cat
-	indices = category_index_map(keySet{i});		                		% indices = keySet{i}
+	indices = category_index_map(keySet{i});		                	% indices = keySet{i}
 	for j = 1:length(indices)				                        % 1 to length of indices
 		masks(i,indices(j)) = 1;			                  	% sets mask to integer 1, indicating seperate categories
 	end
@@ -90,14 +90,14 @@ end
 % concatenate vertically ineq parameters and masks
 A = vertcat(meal_table.Calories',meal_table.Protein',meal_table.Carbs',meal_table.Fat', masks);				
 b = [Calories, Protein, Carbs, Fat, mealLimits];					% ineq parameters for constraint
-Lb = zeros(1,chromosome_length);                                    		% lower/upper/indice bounds for length of chromosome
+Lb = zeros(1,chromosome_length);                                    			% lower/upper/indice bounds for length of chromosome
 Ub = ones(1,chromosome_length);                                     
 int_indices = 1:chromosome_length;
 % run ga:
 disp('-----------------------------GA STARTING-----------------------------');
 options = optimoptions('ga','display','off');
-selection = ga(fit_func,chromosome_length,A,b,...                   		% selection of ga based on fitness function, chromosome length,
-[],[],Lb,Ub,[],int_indices);                                        		% constaints, linear constrains, bounds, nonlinear constraints, % indices
+selection = ga(fit_func,chromosome_length,A,b,...                   			% selection of ga based on fitness function, chromosome length,
+[],[],Lb,Ub,[],int_indices);                                        			% constaints, linear constrains, bounds, nonlinear constraints, % indices
 disp('-----------------------------GA Finished-----------------------------');
 % display results:
 message = sprintf('OPTIMAL SELECTION OF ITEMS:');
