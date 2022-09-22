@@ -25,6 +25,18 @@ f) Replaces the current population with the children to form the next generation
 4. The algorithm takes modified steps for linear and integer constraints. See Integer and Linear Constraints.
 5. The algorithm is further modified for nonlinear constraints.
 
+Implementation of the genetic algorithm:
+
+![image](https://user-images.githubusercontent.com/112568703/191791636-1341e3b4-2667-417c-bcd1-fc5eebd0ca74.png)
+![image](https://user-images.githubusercontent.com/112568703/191789302-75c07853-8d60-4686-9fad-047ceaabaf7d.png)
+![image](https://user-images.githubusercontent.com/112568703/191790487-83c5450a-28eb-4bc9-bde5-5477494a8ac4.png)
+
 When executing the program, the user can set target goals/limits (calories, proteins, carbs, and fats) for the recommended meals. The user also has the option to either include or exclude meal types, this feature was implemented to accommodate unique dietary meal type preferences. By choosing to include a specific meal type, the program allows the user to enter numeric limit of meals for that specific meal type. Once the genetic algorithm has reached an optimal solution, the selection of meals is displayed to the user with the meal's appropriate information (meal type, macros, recipe URL link). Lastly, the macronutrients of the combined meals are displayed to the user.  
 
 It is important to note that genetic algorithms are non-deterministic in method. Thus, the solutions they provide may vary each time you run the algorithm in the same instance. The quality of the results depends highly on: the initial population, genetic operators (crossover, selection, mutation), and probabilities of crossover & mutation. For this project, the implementation of a genetic algorithm aims to recommend a selection of meals that aims to fill the dietary requirements set by the user. Thus, the non-deterministic algorithm can provide different meal recommendations that will aim to fulfill the user's macro targets (which is a terrific way to incorporate new foods into your diet). 
+
+Resources: 
+
+https://www.mathworks.com/help/gads/how-the-genetic-algorithm-works.html
+
+https://www.mathworks.com/help/gads/ga.html
