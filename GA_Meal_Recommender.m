@@ -39,7 +39,7 @@ chromosome_length = height(meal_table);			                    	% chromo_len base
 fit_func = @(chromosome)-(chromosome * ones(chromosome_length,1));		% fit_func considering credits of meal_table
 % defined masks based on class_table:
 category_index_map = containers.Map();				                % creates a category_index_map map
-	for i = 1:height(meal_table)				                    % i to height of meal_table
+	for i = 1:height(meal_table)				                % i to height of meal_table
 	MealType = meal_table.Meal{i};			                        % MealType = MealType{i}
 		if isKey(category_index_map,MealType)		                % iskey(map, MealTye{i}
 		indices = category_index_map(MealType);	                    	% indices = map(MealType)
